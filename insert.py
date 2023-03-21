@@ -5,19 +5,17 @@ data = read_csv()
 cursor = estd_connection()
 
 for each in data[:5]:
-    first_data = each
-    date = first_data["date"]
-    symbol = first_data["symbol"]
-    name = first_data["name"]
-    high = first_data["high"]
-    low = first_data["low"]
+    date = each["date"]
+    symbol = each["symbol"]
+    name = each["name"]
+    high = each["high"]
+    low = each["low"]
 
+    print(each)
+    sql = f"""
+    INSERT INTO MYSHARE(DATE, SYMBOL, NAME, HIGH, LOW)
+    VALUES('{date}', '{symbol}', '{name}', '{high}', '{low}')
+    """
 
-print(first_data)
-sql = f"""
-INSERT INTO MYSHARE(DATE, SYMBOL, NAME, HIGH, LOW)
-VALUES('{date}', '{symbol}', '{name}', '{high}', '{low}')
-"""
-
-cursor.execute(sql)
-print("Data inserted successfully!!")
+    cursor.execute(sql)
+    print("Data inserted successfully!!")
